@@ -5,21 +5,31 @@ using UnityEngine.InputSystem;
 
 public class ControlesJugador : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    private Rigidbody rb; 
+
+    private float movementX;
+    private float movementY; 
+
     void Start()
     {
-        S
+        rb = GetComponent<Rigidbody>();  
+
     }
 
     void OnMove(InputValue MovementValue)
     {
         Vector2 movementVector = MovementValue.Get<Vector2>();
 
+        movementX = movementVector.x;
+        movementY = movementVector.y; 
+
     }
 
-    // Update is called once per frame
-    void Update()
+    
+    void FixedUpdate()
     {
-        
+        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
+        rb.AddForce(movement); 
     }
 }
